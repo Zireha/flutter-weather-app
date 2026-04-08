@@ -27,7 +27,7 @@ class ForecastRow extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Container(
           width: double.infinity,
           height: 120,
@@ -36,13 +36,13 @@ class ForecastRow extends StatelessWidget {
             color: Colors.black.withValues(alpha: .25),
           ),
           child: ListView.separated(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(top: 16, left: 20),
-            separatorBuilder: (_, _) => SizedBox(width: 20),
+            separatorBuilder: (_, _) => const SizedBox(width: 16),
             scrollDirection: Axis.horizontal,
             itemCount: 10,
             itemBuilder: (context, index) {
-              return ForecastItem();
+              return const ForecastItem();
             },
           ),
         ),

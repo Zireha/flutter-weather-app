@@ -1,14 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/auth/secrets.dart';
+import 'package:weather_app/core/providers/http_providers.dart';
 import 'package:weather_app/features/home/data/model/current_weather_model.dart';
 
-// http provider
-final httpClientProvider = Provider((ref) => http.Client());
-
-// remmote data source provider
 final currentWeatherApiProvider = Provider((ref) {
   final client = ref.read(httpClientProvider);
   return CurrentWeatherApi(client);
@@ -28,7 +26,7 @@ class CurrentWeatherApi {
     if (response.statusCode == 200) {
       return CurrentWeatherModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception("Failed to load data");
+      throw Exception("Failed to get data from source");
     }
   }
 }
