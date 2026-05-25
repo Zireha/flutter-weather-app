@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/auth/secrets.dart';
-import 'package:weather_app/core/providers/http_providers.dart';
+import 'package:weather_app/core/global_providers/http_providers.dart';
 import 'package:weather_app/features/home/data/model/current_weather_model.dart';
 
 final currentWeatherApiProvider = Provider((ref) {
@@ -29,4 +28,6 @@ class CurrentWeatherApi {
       throw Exception("Failed to get data from source");
     }
   }
+
+  
 }

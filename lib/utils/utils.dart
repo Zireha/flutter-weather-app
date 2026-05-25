@@ -13,13 +13,24 @@ class TimeUtils {
     String fullDate = DateFormat("yMMMMd").format(DateTime.parse(date));
     return fullDate;
   }
+
+  String timeExtractor(String data) {
+    final parsed = DateTime.parse(data);
+    String hour = DateFormat("HH:mm").format(parsed);
+
+    return hour;
+  }
 }
 
 class NavigationUtils {
-  
   Toastification toastification = Toastification();
-  
-  void onHomeBackPressed(BuildContext context, bool didPop, Object? result, DateTime? lastPressedAt) {
+
+  void onHomeBackPressed(
+    BuildContext context,
+    bool didPop,
+    Object? result,
+    DateTime? lastPressedAt,
+  ) {
     if (didPop) return;
 
     final now = DateTime.now();
