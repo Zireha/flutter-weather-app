@@ -14,7 +14,7 @@ class CustomSearchState extends State<CustomSearch> {
   Widget build(BuildContext context) {
     return SearchAnchor(
       searchController: controller,
-      headerHintStyle: TextStyle(color: Colors.white),
+      headerHintStyle: const TextStyle(color: Colors.white),
       builder: (context, controller) {
         return Container(
           width: double.infinity,
@@ -25,7 +25,7 @@ class CustomSearchState extends State<CustomSearch> {
           ),
           child: Row(
             children: [
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               IconButton(
                 icon: const Icon(Icons.search, color: Colors.white),
                 alignment: Alignment.centerLeft,

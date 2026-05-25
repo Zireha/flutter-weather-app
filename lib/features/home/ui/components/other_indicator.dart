@@ -1,12 +1,23 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:weather_app/features/home/ui/components/other_indicator_item.dart';
 
 class OtherIndicator extends StatelessWidget {
-  const OtherIndicator({super.key});
+  final double visibility;
+  final int humidity;
+  final double precipitation;
+  final double uv;
+
+  const OtherIndicator({
+    super.key,
+    required this.visibility,
+    required this.humidity,
+    required this.precipitation,
+    required this.uv,
+  });
+  
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       spacing: 12,
       children: [
         Row(
@@ -14,12 +25,12 @@ class OtherIndicator extends StatelessWidget {
           children: [
             OtherIndicatorItem(
               icon: CupertinoIcons.eye_fill,
-              subtitle: "10 km",
+              subtitle: "$visibility km",
               title: "Visibility",
             ),
             OtherIndicatorItem(
               icon: CupertinoIcons.drop_fill,
-              subtitle: "78%",
+              subtitle: "$humidity%",
               title: "Humidity",
             ),
           ],
@@ -29,16 +40,16 @@ class OtherIndicator extends StatelessWidget {
           children: [
             OtherIndicatorItem(
               icon: CupertinoIcons.cloud_rain,
-              subtitle: "0.03mm",
+              subtitle: "${precipitation}mm",
               title: "Precipitation",
             ),
             OtherIndicatorItem(
               icon: CupertinoIcons.rays,
-              subtitle: "7,3",
+              subtitle: "$uv",
               title: "UV Rays",
             ),
           ],
-        )
+        ),
       ],
     );
   }

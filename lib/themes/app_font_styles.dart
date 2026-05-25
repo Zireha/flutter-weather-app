@@ -8,11 +8,11 @@ class AppFontStyles {
   );
 
   static TextStyle regularHeader1 = _regular.copyWith(
-    fontSize: 40,
+    fontSize: 36,
     color: Colors.white,
   );
   static TextStyle regularHeader2 = _regular.copyWith(
-    fontSize: 24,
+    fontSize: 20,
     color: Colors.white,
   );
   static TextStyle regularBody1 = _regular.copyWith(
@@ -20,20 +20,20 @@ class AppFontStyles {
     color: Colors.white,
   );
   static TextStyle regularBody2 = _regular.copyWith(
-    fontSize: 14,
+    fontSize: 12,
     color: Colors.white,
   );
   static TextStyle regularSubtitle = _regular.copyWith(
-    fontSize: 12,
+    fontSize: 10,
     color: Colors.white,
   );
 
   static TextStyle boldHeader1 = _bold.copyWith(
-    fontSize: 40,
+    fontSize: 36,
     color: Colors.white,
   );
   static TextStyle boldHeader2 = _bold.copyWith(
-    fontSize: 24,
+    fontSize: 20,
     color: Colors.white,
   );
   static TextStyle boldBody1 = _bold.copyWith(
@@ -41,11 +41,11 @@ class AppFontStyles {
     color: Colors.white,
   );
   static TextStyle boldBody2 = _bold.copyWith(
-    fontSize: 14,
+    fontSize: 12,
     color: Colors.white,
   );
   static TextStyle boldSubtitle = _bold.copyWith(
-    fontSize: 12,
+    fontSize: 10,
     color: Colors.white,
   );
 }
