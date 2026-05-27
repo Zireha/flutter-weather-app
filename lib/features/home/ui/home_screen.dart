@@ -28,21 +28,18 @@ class HomeScreen extends ConsumerWidget {
         canPop: false,
         onPopInvokedWithResult: (didPop, result) async => NavigationUtils()
             .onHomeBackPressed(context, didPop, result, lastPressedAt),
-        child: SafeArea(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              gradient: BackgroundTheme().getBackgroundGradient(
-                weatherCodeState,
-                isDayState,
-              ),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            gradient: BackgroundTheme().getBackgroundGradient(
+              weatherCodeState,
+              isDayState,
             ),
+          ),
+          child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16.0,
-                horizontal: 20.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: locationAsync.when(
                 data: (position) {
                   final query = "${position.latitude}, ${position.longitude}";
@@ -134,6 +131,7 @@ class HomeScreen extends ConsumerWidget {
                                 uv: data.current.uv,
                                 visibility: data.current.visKm,
                               ),
+                              const SizedBox(height: 12.0),
                             ],
                           );
                         },

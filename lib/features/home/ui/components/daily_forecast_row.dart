@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/forecast_model.dart';
 import 'package:weather_app/features/home/ui/components/forecast_item.dart';
+import 'package:weather_app/features/three_days_forecast/ui/three_day_forecast_screen.dart';
 import 'package:weather_app/themes/app_font_styles.dart';
 
 class DailyForecastRow extends ConsumerWidget {
@@ -27,9 +28,14 @@ class DailyForecastRow extends ConsumerWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // TODO: go to daily page
-              },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ThreeDayForecastScreen(
+                    hourlyForecastItem: hourlyForecastItem,
+                  ),
+                ),
+              ),
               child: Text(
                 "See more",
                 style: AppFontStyles.regularBody2.copyWith(

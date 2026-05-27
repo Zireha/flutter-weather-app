@@ -3,14 +3,23 @@ import 'package:weather_app/features/home/data/model/current_weather_model.dart'
 import 'package:weather_app/features/home/providers/repository/current_weather_repository.dart';
 import 'package:weather_app/features/home/providers/theme_provider.dart';
 
-final currentWeatherProvider =
-    FutureProvider.family<CurrentWeatherModel, String>((ref, query) async {
-      final repository = ref.watch(currentWeatherRepositoryProvider);
-      final weatherData = await repository.getCurrentWeather(query);
+/*
+  Provider: part which used to obtain data fetched from data layer and managing
+  or manipulating data that is shown in UI
+ */
 
-      ref.read(isDayProvider.notifier).state = weatherData.current.isDay;
-      ref.read(weatherCodeProvider.notifier).state =
-          weatherData.current.condition.code;
+final currentWeatherProvider = FutureProvider.family<CurrentWeatherModel, String>((
+  ref,
+  query,
+) async {
+  final repository = ref.watch(currentWeatherRepositoryProvider);
+  final weatherData = await repository.getCurrentWeather(query);
 
-      return weatherData;
-    });
+  Future.microtask(() {
+    ref.read(isDayProvider.notifier).state = weatherData.current.isDay;
+    ref.read(weatherCodeProvider.notifier).state =
+        weatherData.current.condition.code;
+  });
+
+  return weatherData;
+});

@@ -2,6 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/current_weather_model.dart';
 import 'package:weather_app/features/home/data/source/current_weather_api.dart';
 
+/*
+  Repository: part which used as a bridge between data layer and UI layer
+ */
+
 final currentWeatherRepositoryProvider = Provider((ref) {
   final dataSource = ref.read(currentWeatherApiProvider);
   return CurrentWeatherRepository(dataSource);
