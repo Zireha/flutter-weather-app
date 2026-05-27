@@ -50,7 +50,7 @@ extension WeatherTheme on WeatherCondition {
         );
       case WeatherCondition.nighttimeClear:
         return LinearGradient(
-          stops: [0, 0.72],
+          stops: const [0, 0.72],
           colors: [
             const Color(0xff1A004E).withAlpha(207),
             const Color(0xff003B5E),
@@ -60,7 +60,7 @@ extension WeatherTheme on WeatherCondition {
         );
       case WeatherCondition.nighttimeCloudy:
         return LinearGradient(
-          stops: [0, 0.38],
+          stops: const [0, 0.38],
           colors: [
             const Color(0xff636261).withAlpha(25),
             const Color(0xff003B5E),
@@ -70,7 +70,7 @@ extension WeatherTheme on WeatherCondition {
         );
       case WeatherCondition.nighttimeOvercast:
         return LinearGradient(
-          stops: [0.05, 0.3, 0.62],
+          stops: const [0.05, 0.3, 0.62],
           colors: [
             const Color(0xff787878).withAlpha(24),
             const Color(0xff49606E).withAlpha(138),
@@ -95,8 +95,31 @@ extension WeatherTheme on WeatherCondition {
   }
 }
 
+class BackgroundTheme {
+  LinearGradient getBackgroundGradient(int code, int isDay) {
+    bool isDayTime = isDay == 1;
+
+    switch (code) {
+      case 1000: // Sunny / Clear
+        return isDayTime ? WeatherCondition.daytimeClear.gradient : WeatherCondition.nighttimeClear.gradient;
+      case 1003: // Partly cloudy
+        return isDayTime ? WeatherCondition.daytimeCloudy.gradient : WeatherCondition.nighttimeCloudy.gradient;
+      case 1006: // Cloudy
+      case 1009: // Overcast
+      case 1030: // Mist
+      case 1135: // Fog
+      case 1147: // Freezing fog
+        return isDayTime ? WeatherCondition.daytimeOvercast.gradient : WeatherCondition.nighttimeOvercast.gradient;
+      default: // Hujan, Salju, Badai Petir (semua kondisi lainnya)
+        return isDayTime
+            ? WeatherCondition.daytimeRainyorSnowy.gradient
+            : WeatherCondition.nighttimeRainyorSnowy.gradient;
+    }
+  }
+}
+
 class IconWeather {
-  IconData getWeatherIcon(int code, bool isDay) {
+  IconData getWeatherIcon({required int code, required bool isDay}) {
     switch (code) {
       case 1000: // Sunny / Clear
         return isDay ? CupertinoIcons.sun_max : CupertinoIcons.moon_stars;

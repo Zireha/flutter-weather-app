@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/global_providers/location_provider.dart';
 import 'package:weather_app/features/home/providers/current_weather_provider.dart';
 import 'package:weather_app/features/home/providers/today_forecast_provider.dart';
+import 'package:weather_app/features/home/ui/components/weekly_forecast.dart';
+import 'package:weather_app/themes/app_font_styles.dart';
 import 'components/component_data.dart';
 import 'package:weather_app/utils/utils.dart';
 import 'package:weather_app/utils/weather_theme.dart';
+import 'package:weather_app/features/home/providers/theme_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -17,6 +20,8 @@ class HomeScreen extends ConsumerWidget {
     DateTime? lastPressedAt;
 
     final locationAsync = ref.watch(locationProvider);
+    final isDayState = ref.watch(isDayProvider);
+    final weatherCodeState = ref.watch(weatherCodeProvider);
 
     return Scaffold(
       body: PopScope(
@@ -28,7 +33,10 @@ class HomeScreen extends ConsumerWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-              gradient: WeatherCondition.daytimeClear.gradient,
+              gradient: BackgroundTheme().getBackgroundGradient(
+                weatherCodeState,
+                isDayState,
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -72,9 +80,8 @@ class HomeScreen extends ConsumerWidget {
                               // today forecast
                               todayForecast.when(
                                 data: (data) {
-                                  return ForecastRow(
+                                  return DailyForecastRow(
                                     title: "Today's Forecast",
-                                    isHourly: true,
                                     hourlyForecastItem:
                                         data.forecast.forecastday.first.hour,
                                   );
@@ -89,15 +96,31 @@ class HomeScreen extends ConsumerWidget {
                               const SizedBox(height: 20),
                               threeDayForecast.when(
                                 data: (data) {
-                                  return ForecastRow(
-                                    title: "3 Days Forecast",
-                                    isHourly: false,
+                                  return WeeklyForecast(
                                     weeklyForecastItem:
                                         data.forecast.forecastday,
                                   );
                                 },
-                                error: (e, _) => const SizedBox(),
-                                loading: () => const SizedBox(),
+                                error: (e, _) => Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withAlpha(75),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Text(
+                                    e.toString(),
+                                    style: AppFontStyles.regularBody2.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                loading: () => Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withAlpha(75),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 24),
                               WindIndicatorCard(

@@ -24,7 +24,7 @@ class ForecastItem extends StatelessWidget {
     return Column(
       children: [
         Icon(
-          IconWeather().getWeatherIcon(code, isDay == 1 ? true : false),
+          IconWeather().getWeatherIcon(code: code, isDay: isDay == 1 ? true : false),
           size: 40,
           color: Colors.white,
         ),

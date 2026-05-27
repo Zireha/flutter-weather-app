@@ -18,8 +18,8 @@ class TodayWeather extends StatelessWidget {
         children: [
           Icon(
             IconWeather().getWeatherIcon(
-              data.current.condition.code,
-              data.current.isDay == 1 ? true : false,
+              code: data.current.condition.code,
+              isDay: data.current.isDay == 1 ? true : false,
             ),
             size: 128,
             color: Colors.white,
