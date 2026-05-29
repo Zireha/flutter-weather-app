@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/forecast_model.dart';
-import 'package:weather_app/features/home/providers/repository/today_forecast_repository.dart';
+import 'package:weather_app/features/home/domain/repository/today_forecast_repository.dart';
 
 final todayForecastProvider = FutureProvider.family<ForecastModel, String>((
   ref,

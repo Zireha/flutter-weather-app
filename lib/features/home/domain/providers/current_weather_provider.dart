@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/current_weather_model.dart';
-import 'package:weather_app/features/home/providers/repository/current_weather_repository.dart';
-import 'package:weather_app/features/home/providers/theme_provider.dart';
+import 'package:weather_app/features/home/domain/repository/current_weather_repository.dart';
+import 'package:weather_app/features/home/domain/providers/theme_provider.dart';
 
 /*
   Provider: part which used to obtain data fetched from data layer and managing

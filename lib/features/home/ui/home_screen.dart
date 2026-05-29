@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/global_providers/location_provider.dart';
-import 'package:weather_app/features/home/providers/current_weather_provider.dart';
-import 'package:weather_app/features/home/providers/today_forecast_provider.dart';
+import 'package:weather_app/features/home/domain/providers/current_weather_provider.dart';
+import 'package:weather_app/features/home/domain/providers/today_forecast_provider.dart';
 import 'package:weather_app/features/home/ui/components/weekly_forecast.dart';
 import 'package:weather_app/themes/app_font_styles.dart';
 import 'components/component_data.dart';
 import 'package:weather_app/utils/utils.dart';
 import 'package:weather_app/utils/weather_theme.dart';
-import 'package:weather_app/features/home/providers/theme_provider.dart';
+import 'package:weather_app/features/home/domain/providers/theme_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -90,7 +90,16 @@ class HomeScreen extends ConsumerWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 20),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 128.0,
+                                ),
+                                child: Divider(
+                                  thickness: 2,
+                                  height: 24,
+                                  color: Colors.white.withAlpha(100),
+                                ),
+                              ),
                               threeDayForecast.when(
                                 data: (data) {
                                   return WeeklyForecast(
@@ -119,7 +128,16 @@ class HomeScreen extends ConsumerWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 128.0,
+                                ),
+                                child: Divider(
+                                  thickness: 2,
+                                  height: 32,
+                                  color: Colors.white.withAlpha(100),
+                                ),
+                              ),
                               WindIndicatorCard(
                                 windKph: data.current.windKph,
                                 windChillInCelsius: data.current.windchillC,

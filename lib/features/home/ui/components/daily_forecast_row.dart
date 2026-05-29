@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/forecast_model.dart';
 import 'package:weather_app/features/home/ui/components/forecast_item.dart';
-import 'package:weather_app/features/three_days_forecast/ui/three_day_forecast_screen.dart';
+import 'package:weather_app/features/three_days_forecast/ui/three_days_forecast_screen.dart';
 import 'package:weather_app/themes/app_font_styles.dart';
 
 class DailyForecastRow extends ConsumerWidget {
@@ -30,10 +30,27 @@ class DailyForecastRow extends ConsumerWidget {
             GestureDetector(
               onTap: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ThreeDayForecastScreen(
+                PageRouteBuilder(
+                  pageBuilder: (context, _, _) => ThreeDayForecastScreen(
                     hourlyForecastItem: hourlyForecastItem,
                   ),
+                  transitionsBuilder: (context, animation, _, child) {
+                    const startOffset = Offset(1.0, 0.0);
+                    const endOffset = Offset.zero;
+                    const curve = Curves.easeInQuart;
+
+                    var tween = Tween(
+                      begin: startOffset,
+                      end: endOffset,
+                    ).chain(CurveTween(curve: curve));
+
+                    var offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
                 ),
               ),
               child: Text(

@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/features/home/data/model/forecast_model.dart';
-import 'package:weather_app/features/home/data/source/forecast_api.dart';
+import 'package:weather_app/features/home/data/source/current_weather_api.dart';
 
 final todayForecastRepositoryProvider = Provider((ref) {
-  final data = ref.read(todayForecastApiProvider);
+  final data = ref.read(currentWeatherApiProvider);
   return TodayForecastRepository(data);
 });
 
 class TodayForecastRepository {
-  final ForecastApi api;
+  final CurrentWeatherApi api;
   TodayForecastRepository(this.api);
 
   Future<ForecastModel> getTodayForecast({
